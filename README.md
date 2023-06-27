@@ -5,7 +5,7 @@ Este es un servicio RESTful que ofrece operaciones relacionadas con las polizas 
 ## Configuración
 Para ejecutar el servicio, asegúrate de tener instalado MongoDB en tu entorno local y realiza los siguientes pasos:
 
-1. Clona el repositorio del servicio desde [URL_DEL_REPOSITORIO].
+1. Clona el repositorio del servicio desde (https://github.com/Natalia2806/PersonalSoft.git).
 2. Abre el archivo appsettings.json y verifica la configuración de conexión a la base de datos MongoDB. Asegúrate de proporcionar la URL correcta y las credenciales de acceso si es necesario.
 3. Ejecuta los comandos de migración para configurar la base de datos y crear las colecciones necesarias.
    
