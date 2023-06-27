@@ -15,19 +15,42 @@ namespace PruebaPersonalSoft.Controllers
     {
         private IPolizaCollection polizaCollection = new PolizaCollection();
 
+        public IConfiguration _configuration;
+
+        public PolizaController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetAllPoliza()
         {
             try
             {
-                return Ok(
-                 new
-                 {
-                     success = true,
-                     message = "Polizas encontrada exitosamente",
-                     result = await polizaCollection.GetAllPoliza()
-                 });
+                var poliza = await polizaCollection.GetAllPoliza();
+
+                if (poliza != null)
+                {
+                    return Ok(
+                  new
+                  {
+                      success = true,
+                      message = "Poliza encontrada exitosamente",
+                      result = poliza
+
+                  });
+                }
+                else
+                {
+                    return BadRequest(new
+                    {
+                        success = false,
+                        message = "No se encontro informacion de la poliza",
+                        result = ""
+                    });
+                }
+              
             }
             catch (Exception e)
             {
@@ -42,13 +65,31 @@ namespace PruebaPersonalSoft.Controllers
         {
             try
             {
-                return Ok(
-                    new
+
+                var poliza = await polizaCollection.GetPolizaByParameters(placaVehiculo, numPoliza);
+
+                if(poliza != null)
+                {
+                    return Ok(
+                  new
+                  {
+                      success = true,
+                      message = "Poliza encontrada exitosamente",
+                      result = poliza
+
+                  });
+                }
+                else
+                {
+
+                    return BadRequest(new
                     {
-                        success = true,
-                        message = "Poliza encontrada exitosamente",
-                        result = await polizaCollection.GetPolizaByParameters(placaVehiculo, numPoliza)
+                        success = false,
+                        message = "No se encontro informacion de la poliza",
+                        result = ""
                     });
+                }
+              
             }
             catch (Exception e)
             {
